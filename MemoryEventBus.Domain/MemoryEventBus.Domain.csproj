@@ -22,7 +22,6 @@
     <PublishRepositoryUrl>true</PublishRepositoryUrl>
     <EmbedUntrackedSources>true</EmbedUntrackedSources>
     <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
-    <NoWarn>$(NoWarn);1591</NoWarn>
     <LangVersion>preview</LangVersion>
   </PropertyGroup>
 
