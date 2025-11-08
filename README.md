@@ -6,13 +6,13 @@ Uma implementação customizada de Event Bus baseada em `System.Threading.Channe
 
 ## Funcionalidades Implementadas
 
-### ? Versão Básica (Funcional)
+### Versão Básica (Funcional)
 - [x] **Event Channel Manager** - Gerenciamento de channels com `ConcurrentDictionary`
 - [x] **Producers/Consumers** - Publicação e consumo assíncrono de eventos
 - [x] **Domain Events** - Implementação baseada em DDD
 - [x] **Performance Otimizada** - Usando `Channel.CreateUnbounded` para alta performance
 
-### ? Funcionalidades Avançadas (Opcionais)
+### Funcionalidades Avançadas (Opcionais)
 - [x] **Error Handling Centralizado** - `IEventBusErrorHandler` e `DefaultEventBusErrorHandler`
 - [x] **Retry Policies** - `ExponentialBackoffRetryPolicy` e `LinearRetryPolicy`
 - [x] **Metrics/Observability** - Usando `System.Diagnostics.Metrics` (.NET 8)
@@ -135,9 +135,9 @@ public Channel<DomainEvent> GetOrCreateBoundedChannel<TEvent>(int capacity) wher
 
 Esta implementação oferece uma alternativa de alta performance ao MediatR, especialmente adequada para:
 
-- ? **Microsserviços de alta throughput**
-- ? **Sistemas com requisitos rigorosos de latência**
-- ? **Cenários onde controle fino sobre o processamento é necessário**
-- ? **Aplicações que precisam de observabilidade detalhada**
+-  **Microsserviços de alta throughput**
+-  **Sistemas com requisitos rigorosos de latência**
+-  **Cenários onde controle fino sobre o processamento é necessário**
+-  **Aplicações que precisam de observabilidade detalhada**
 
 Para projetos que requerem funcionalidades mais complexas de pipeline (validação, autorização, etc.), o MediatR ainda pode ser mais apropriado.
