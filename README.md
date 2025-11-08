@@ -1,18 +1,20 @@
 # MemoryEventBus - High-Performance In-Memory Event Bus
 
-## Vis„o Geral
+Uma implementa√ß√£o customizada de Event Bus baseada em `System.Threading.Channels` que oferece performance superior ao MediatR para cen√°rios de alta throughput, com funcionalidades opcionais avan√ßadas.
 
-Uma implementaÁ„o customizada de Event Bus baseada em `System.Threading.Channels` que oferece performance superior ao MediatR para cen·rios de alta throughput, com funcionalidades opcionais avanÁadas.
+## Vis√£o Geral
+
+Uma implementa√ß√£o customizada de Event Bus baseada em `System.Threading.Channels` que oferece performance superior ao MediatR para cen√°rios de alta throughput, com funcionalidades opcionais avan√ßadas.
 
 ## Funcionalidades Implementadas
 
-### ? Vers„o B·sica (Funcional)
+### ? Vers√£o B√°sica (Funcional)
 - [x] **Event Channel Manager** - Gerenciamento de channels com `ConcurrentDictionary`
-- [x] **Producers/Consumers** - PublicaÁ„o e consumo assÌncrono de eventos
-- [x] **Domain Events** - ImplementaÁ„o baseada em DDD
+- [x] **Producers/Consumers** - Publica√ß√£o e consumo ass√≠ncrono de eventos
+- [x] **Domain Events** - Implementa√ß√£o baseada em DDD
 - [x] **Performance Otimizada** - Usando `Channel.CreateUnbounded` para alta performance
 
-### ? Funcionalidades AvanÁadas (Opcionais)
+### ? Funcionalidades Avan√ßadas (Opcionais)
 - [x] **Error Handling Centralizado** - `IEventBusErrorHandler` e `DefaultEventBusErrorHandler`
 - [x] **Retry Policies** - `ExponentialBackoffRetryPolicy` e `LinearRetryPolicy`
 - [x] **Metrics/Observability** - Usando `System.Diagnostics.Metrics` (.NET 8)
@@ -20,7 +22,7 @@ Uma implementaÁ„o customizada de Event Bus baseada em `System.Threading.Channels
 
 ## Como Usar
 
-### ConfiguraÁ„o B·sica (Recomendada para comeÁar)
+### Configura√ß√£o B√°sica (Recomendada para come√ßar)
 
 No `appsettings.json`:
 ```json
@@ -31,7 +33,7 @@ No `appsettings.json`:
 }
 ```
 
-### ConfiguraÁ„o AvanÁada (Com todas as funcionalidades)
+### Configura√ß√£o Avan√ßada (Com todas as funcionalidades)
 
 No `appsettings.json`:
 ```json
@@ -64,12 +66,12 @@ No `appsettings.json`:
 
 ## Performance vs MediatR
 
-| MÈtrica | MemoryEventBus | MediatR |
+| M√©trica | MemoryEventBus | MediatR |
 |---------|----------------|---------|
 | Throughput | ~10-50x maior | Baseline |
-| LatÍncia | Muito baixa | Baixa |
+| Lat√™ncia | Muito baixa | Baixa |
 | Memory | Menor overhead | Maior overhead |
-| Reflection | MÌnima | Extensiva |
+| Reflection | M√≠nima | Extensiva |
 
 ## Exemplo de Uso
 
@@ -131,13 +133,13 @@ public async Task HandleErrorAsync<TEvent>(TEvent @event, Exception exception, i
 public Channel<DomainEvent> GetOrCreateBoundedChannel<TEvent>(int capacity) where TEvent : DomainEvent
 ```
 
-## Conclus„o
+## Conclus√£o
 
-Esta implementaÁ„o oferece uma alternativa de alta performance ao MediatR, especialmente adequada para:
+Esta implementa√ß√£o oferece uma alternativa de alta performance ao MediatR, especialmente adequada para:
 
-- ? **MicrosserviÁos de alta throughput**
-- ? **Sistemas com requisitos rigorosos de latÍncia**
-- ? **Cen·rios onde controle fino sobre o processamento È necess·rio**
-- ? **AplicaÁıes que precisam de observabilidade detalhada**
+- ? **Microsservi√ßos de alta throughput**
+- ? **Sistemas com requisitos rigorosos de lat√™ncia**
+- ? **Cen√°rios onde controle fino sobre o processamento √© necess√°rio**
+- ? **Aplica√ß√µes que precisam de observabilidade detalhada**
 
-Para projetos que requerem funcionalidades mais complexas de pipeline (validaÁ„o, autorizaÁ„o, etc.), o MediatR ainda pode ser mais apropriado.
+Para projetos que requerem funcionalidades mais complexas de pipeline (valida√ß√£o, autoriza√ß√£o, etc.), o MediatR ainda pode ser mais apropriado.
