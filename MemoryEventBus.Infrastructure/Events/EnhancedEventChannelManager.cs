@@ -1,18 +1,23 @@
 using System.Diagnostics;
 using MemoryEventBus.Domain.Events;
-using MemoryEventBus.Domain.Events.Aggregate;
 using MemoryEventBus.Domain.Events.Interfaces.Base;
 using MemoryEventBus.Infrastructure.Events.Diagnostics;
 using Microsoft.Extensions.Logging;
 
 namespace MemoryEventBus.Infrastructure.Events
 {
+    /// <summary>
+    /// Decorated channel manager that adds logging, metrics, and optional tracing to publish operations.
+    /// </summary>
     public class EnhancedEventChannelManager : EventChannelManager
     {
         private readonly ILogger<EnhancedEventChannelManager> _logger;
         private readonly IEventBusMetrics? _metrics;
         private readonly EventBusActivitySource? _activitySource;
 
+        /// <summary>
+        /// Creates a new <see cref="EnhancedEventChannelManager"/>.
+        /// </summary>
         public EnhancedEventChannelManager(ILogger<EnhancedEventChannelManager> logger, IEventBusMetrics? metrics = null, EventBusActivitySource? activitySource = null)
         {
             _logger = logger;
@@ -20,6 +25,7 @@ namespace MemoryEventBus.Infrastructure.Events
             _activitySource = activitySource;
         }
 
+        /// <inheritdoc />
         public override async Task<bool> TryWriteAsync<TEvent>(TEvent @event, CancellationToken cancellationToken = default)
         {
             Activity? activity = _activitySource?.StartPublishActivity(typeof(TEvent).Name);
@@ -53,6 +59,7 @@ namespace MemoryEventBus.Infrastructure.Events
             }
         }
 
+        /// <inheritdoc />
         public override int GetChannelDepth<TEvent>()
         {
             var depth = base.GetChannelDepth<TEvent>();

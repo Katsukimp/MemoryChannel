@@ -1,8 +1,11 @@
-using MemoryEventBus.Domain.Events.Interfaces.Base;
 using System.Diagnostics.Metrics;
+using MemoryEventBus.Domain.Events.Interfaces.Base;
 
 namespace MemoryEventBus.Infrastructure.Events.Metrics
 {
+    /// <summary>
+    /// Default metrics implementation using <see cref="Meter"/> to record counters and histograms for the event bus.
+    /// </summary>
     public class EventBusMetrics : IEventBusMetrics, IDisposable
     {
         private readonly Meter _meter;
@@ -14,6 +17,9 @@ namespace MemoryEventBus.Infrastructure.Events.Metrics
         private readonly ObservableGauge<int> _channelDepthGauge;
         private readonly Dictionary<string, int> _channelDepths;
 
+        /// <summary>
+        /// Creates a new instance of <see cref="EventBusMetrics"/>.
+        /// </summary>
         public EventBusMetrics()
         {
             _meter = new Meter("MemoryEventBus", "1.0.0");
@@ -59,17 +65,20 @@ namespace MemoryEventBus.Infrastructure.Events.Metrics
             }
         }
 
+        /// <inheritdoc />
         public void RecordEventPublished<TEvent>(string eventType)
         {
             _eventsPublishedCounter.Add(1, new KeyValuePair<string, object?>("event_type", eventType));
         }
 
+        /// <inheritdoc />
         public void RecordEventConsumed<TEvent>(string eventType, TimeSpan processingTime)
         {
             _eventsConsumedCounter.Add(1, new KeyValuePair<string, object?>("event_type", eventType));
             _processingTimeHistogram.Record(processingTime.TotalSeconds, new KeyValuePair<string, object?>("event_type", eventType));
         }
 
+        /// <inheritdoc />
         public void RecordEventFailed<TEvent>(string eventType, string errorType)
         {
             _eventsFailedCounter.Add(1, 
@@ -77,6 +86,7 @@ namespace MemoryEventBus.Infrastructure.Events.Metrics
                 new KeyValuePair<string, object?>("error_type", errorType));
         }
 
+        /// <inheritdoc />
         public void RecordRetryAttempt<TEvent>(string eventType, int attemptNumber)
         {
             _retryAttemptsCounter.Add(1, 
@@ -84,11 +94,15 @@ namespace MemoryEventBus.Infrastructure.Events.Metrics
                 new KeyValuePair<string, object?>("attempt_number", attemptNumber));
         }
 
+        /// <inheritdoc />
         public void RecordChannelDepth(string channelType, int depth)
         {
             _channelDepths[channelType] = depth;
         }
 
+        /// <summary>
+        /// Disposes underlying meter resources.
+        /// </summary>
         public void Dispose()
         {
             _meter?.Dispose();

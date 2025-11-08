@@ -1,14 +1,18 @@
-﻿using MemoryEventBus.Domain.Events.Aggregate;
-using MemoryEventBus.Domain.Events.Interfaces.Base;
-using System.Collections.Concurrent;
+﻿using System.Collections.Concurrent;
 using System.Threading.Channels;
+using MemoryEventBus.Domain.Events.Aggregate;
+using MemoryEventBus.Domain.Events.Interfaces.Base;
 
 namespace MemoryEventBus.Domain.Events
 {
+    /// <summary>
+    /// Default implementation of <see cref="IEventChannelManager"/> managing channels per event type.
+    /// </summary>
     public class EventChannelManager : IEventChannelManager
     {
         private readonly ConcurrentDictionary<Type, Channel<DomainEvent>> _channels = new();
         
+        /// <inheritdoc />
         public virtual Channel<DomainEvent> GetOrCreateChannel<TEvent>() where TEvent : DomainEvent
         {
             return _channels.GetOrAdd(typeof(TEvent), _ => 
@@ -24,6 +28,7 @@ namespace MemoryEventBus.Domain.Events
             });
         }
 
+        /// <inheritdoc />
         public virtual Channel<DomainEvent> GetOrCreateBoundedChannel<TEvent>(int capacity) where TEvent : DomainEvent
         {
             return _channels.GetOrAdd(typeof(TEvent), _ => 
@@ -40,6 +45,7 @@ namespace MemoryEventBus.Domain.Events
             });
         }
 
+        /// <inheritdoc />
         public virtual async Task<bool> TryWriteAsync<TEvent>(TEvent @event, CancellationToken cancellationToken = default) where TEvent : DomainEvent
         {
             if (_channels.TryGetValue(typeof(TEvent), out var channel) is false)
@@ -60,6 +66,7 @@ namespace MemoryEventBus.Domain.Events
             }
         }
 
+        /// <inheritdoc />
         public virtual int GetChannelDepth<TEvent>() where TEvent : DomainEvent
         {
             if (_channels.TryGetValue(typeof(TEvent), out var channel))
@@ -74,12 +81,14 @@ namespace MemoryEventBus.Domain.Events
             return 0;
         }
 
+        /// <inheritdoc />
         public virtual void CloseChannel<TEvent>() where TEvent : DomainEvent
         {
             if (_channels.TryRemove(typeof(TEvent), out var channel))
                 channel.Writer.Complete();
         }
 
+        /// <inheritdoc />
         public virtual int GetChannelCount() => _channels.Count;
     }
 }
