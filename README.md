@@ -1,7 +1,5 @@
 # MemoryEventBus - High-Performance In-Memory Event Bus
 
-Uma implementação customizada de Event Bus baseada em `System.Threading.Channels` que oferece performance superior ao MediatR para cenários de alta throughput, com funcionalidades opcionais avançadas.
-
 ## Visão Geral
 
 Uma implementação customizada de Event Bus baseada em `System.Threading.Channels` que oferece performance superior ao MediatR para cenários de alta throughput, com funcionalidades opcionais avançadas.
