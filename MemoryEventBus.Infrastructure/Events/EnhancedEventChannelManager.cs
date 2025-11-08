@@ -1,6 +1,5 @@
 using System.Diagnostics;
 using MemoryEventBus.Domain.Events;
-using MemoryEventBus.Domain.Events.Aggregate;
 using MemoryEventBus.Domain.Events.Interfaces.Base;
 using MemoryEventBus.Infrastructure.Events.Diagnostics;
 using Microsoft.Extensions.Logging;

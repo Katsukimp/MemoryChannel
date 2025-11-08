@@ -8,7 +8,7 @@ namespace MemoryEventBus.Domain.Events.Configuration
         public TimeSpan DefaultRetryBaseDelay { get; set; } = TimeSpan.FromMilliseconds(100);
         public TimeSpan DefaultRetryMaxDelay { get; set; } = TimeSpan.FromSeconds(30);
         
-        public Dictionary<string, int> EventTypeChannelCapacities { get; set; } = new();
-        public Dictionary<string, int> EventTypeMaxRetryAttempts { get; set; } = new();
+        public Dictionary<string, int> EventTypeChannelCapacities { get; set; } = [];
+        public Dictionary<string, int> EventTypeMaxRetryAttempts { get; set; } = [];
     }
 }

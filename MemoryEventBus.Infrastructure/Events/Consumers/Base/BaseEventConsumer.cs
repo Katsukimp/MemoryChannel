@@ -6,91 +6,90 @@ using System.Diagnostics;
 using System.Threading.Channels;
 using MemoryEventBus.Infrastructure.Events.Diagnostics;
 
-namespace MemoryEventBus.Infrastructure.Events.Consumers.Base
+namespace MemoryEventBus.Infrastructure.Events.Consumers.Base;
+
+public abstract class BaseEventConsumer<TEvent> : BackgroundService where TEvent : DomainEvent
 {
-    public abstract class BaseEventConsumer<TEvent> : BackgroundService where TEvent : DomainEvent
+    protected readonly Channel<DomainEvent> _channel;
+    protected readonly ILogger<BaseEventConsumer<TEvent>> _logger;
+    protected readonly IEventBusErrorHandler _errorHandler;
+    protected readonly IRetryPolicy _retryPolicy;
+    protected readonly IEventBusMetrics? _metrics;
+    protected readonly EventBusActivitySource? _activitySource;
+
+    protected BaseEventConsumer(
+        IEventChannelManager channelManager,
+        ILogger<BaseEventConsumer<TEvent>> logger,
+        IEventBusErrorHandler errorHandler,
+        IRetryPolicy retryPolicy,
+        IEventBusMetrics? metrics = null,
+        EventBusActivitySource? activitySource = null)
     {
-        protected readonly Channel<DomainEvent> _channel;
-        protected readonly ILogger<BaseEventConsumer<TEvent>> _logger;
-        protected readonly IEventBusErrorHandler _errorHandler;
-        protected readonly IRetryPolicy _retryPolicy;
-        protected readonly IEventBusMetrics? _metrics;
-        protected readonly EventBusActivitySource? _activitySource;
+        _channel = channelManager.GetOrCreateChannel<TEvent>();
+        _logger = logger;
+        _errorHandler = errorHandler;
+        _retryPolicy = retryPolicy;
+        _metrics = metrics;
+        _activitySource = activitySource;
+    }
 
-        protected BaseEventConsumer(
-            IEventChannelManager channelManager,
-            ILogger<BaseEventConsumer<TEvent>> logger,
-            IEventBusErrorHandler errorHandler,
-            IRetryPolicy retryPolicy,
-            IEventBusMetrics? metrics = null,
-            EventBusActivitySource? activitySource = null)
+    protected override async Task ExecuteAsync(CancellationToken stoppingToken)
+    {
+        _logger.LogInformation("Starting consumer for event type {EventType}", typeof(TEvent).Name);
+
+        await foreach (var domainEvent in _channel.Reader.ReadAllAsync(stoppingToken))
         {
-            _channel = channelManager.GetOrCreateChannel<TEvent>();
-            _logger = logger;
-            _errorHandler = errorHandler;
-            _retryPolicy = retryPolicy;
-            _metrics = metrics;
-            _activitySource = activitySource;
-        }
-
-        protected override async Task ExecuteAsync(CancellationToken stoppingToken)
-        {
-            _logger.LogInformation("Starting consumer for event type {EventType}", typeof(TEvent).Name);
-
-            await foreach (var domainEvent in _channel.Reader.ReadAllAsync(stoppingToken))
+            if (domainEvent is TEvent typedEvent)
             {
-                if (domainEvent is TEvent typedEvent)
-                {
-                    await ProcessWithRetryAsync(typedEvent, stoppingToken);
-                }
+                await ProcessWithRetryAsync(typedEvent, stoppingToken);
             }
         }
+    }
 
-        private async Task ProcessWithRetryAsync(TEvent @event, CancellationToken cancellationToken)
+    private async Task ProcessWithRetryAsync(TEvent @event, CancellationToken cancellationToken)
+    {
+        using var activity = _activitySource?.StartConsumeActivity(typeof(TEvent).Name);
+        var stopwatch = Stopwatch.StartNew();
+        var attemptNumber = 1;
+
+        while (true)
         {
-            using var activity = _activitySource?.StartConsumeActivity(typeof(TEvent).Name);
-            var stopwatch = Stopwatch.StartNew();
-            var attemptNumber = 1;
-
-            while (true)
+            try
             {
-                try
+                await ProcessEventAsync(@event, cancellationToken);
+                stopwatch.Stop();
+                _metrics?.RecordEventConsumed<TEvent>(typeof(TEvent).Name, stopwatch.Elapsed);
+                activity?.SetTag("eventbus.consume.success", true);
+                _logger.LogDebug("Successfully processed event {EventId} of type {EventType} in {ElapsedMs}ms", 
+                    @event.EventId, typeof(TEvent).Name, stopwatch.ElapsedMilliseconds);
+                return;
+            }
+            catch (Exception ex)
+            {
+                activity?.SetTag("eventbus.consume.error", ex.GetType().Name);
+                _logger.LogWarning(ex, "Error processing event {EventId} of type {EventType} on attempt {AttemptNumber}", 
+                    @event.EventId, typeof(TEvent).Name, attemptNumber);
+
+                await _errorHandler.HandleErrorAsync(@event, ex, attemptNumber, cancellationToken);
+
+                if (!_retryPolicy.ShouldRetry(attemptNumber, ex))
                 {
-                    await ProcessEventAsync(@event, cancellationToken);
-                    stopwatch.Stop();
-                    _metrics?.RecordEventConsumed<TEvent>(typeof(TEvent).Name, stopwatch.Elapsed);
-                    activity?.SetTag("eventbus.consume.success", true);
-                    _logger.LogDebug("Successfully processed event {EventId} of type {EventType} in {ElapsedMs}ms", 
-                        @event.EventId, typeof(TEvent).Name, stopwatch.ElapsedMilliseconds);
+                    _logger.LogError("Failed to process event {EventId} of type {EventType} after {AttemptNumber} attempts. Giving up.", 
+                        @event.EventId, typeof(TEvent).Name, attemptNumber);
+                    _metrics?.RecordEventFailed<TEvent>(typeof(TEvent).Name, ex.GetType().Name);
                     return;
                 }
-                catch (Exception ex)
-                {
-                    activity?.SetTag("eventbus.consume.error", ex.GetType().Name);
-                    _logger.LogWarning(ex, "Error processing event {EventId} of type {EventType} on attempt {AttemptNumber}", 
-                        @event.EventId, typeof(TEvent).Name, attemptNumber);
 
-                    await _errorHandler.HandleErrorAsync(@event, ex, attemptNumber, cancellationToken);
+                _metrics?.RecordRetryAttempt<TEvent>(typeof(TEvent).Name, attemptNumber);
+                var delay = _retryPolicy.GetDelay(attemptNumber);
+                _logger.LogInformation("Retrying event {EventId} in {DelayMs}ms (attempt {AttemptNumber})", 
+                    @event.EventId, delay.TotalMilliseconds, attemptNumber + 1);
 
-                    if (!_retryPolicy.ShouldRetry(attemptNumber, ex))
-                    {
-                        _logger.LogError("Failed to process event {EventId} of type {EventType} after {AttemptNumber} attempts. Giving up.", 
-                            @event.EventId, typeof(TEvent).Name, attemptNumber);
-                        _metrics?.RecordEventFailed<TEvent>(typeof(TEvent).Name, ex.GetType().Name);
-                        return;
-                    }
-
-                    _metrics?.RecordRetryAttempt<TEvent>(typeof(TEvent).Name, attemptNumber);
-                    var delay = _retryPolicy.GetDelay(attemptNumber);
-                    _logger.LogInformation("Retrying event {EventId} in {DelayMs}ms (attempt {AttemptNumber})", 
-                        @event.EventId, delay.TotalMilliseconds, attemptNumber + 1);
-
-                    await Task.Delay(delay, cancellationToken);
-                    attemptNumber++;
-                }
+                await Task.Delay(delay, cancellationToken);
+                attemptNumber++;
             }
         }
-
-        protected abstract Task ProcessEventAsync(TEvent @event, CancellationToken cancellationToken);
     }
+
+    protected abstract Task ProcessEventAsync(TEvent @event, CancellationToken cancellationToken);
 }
