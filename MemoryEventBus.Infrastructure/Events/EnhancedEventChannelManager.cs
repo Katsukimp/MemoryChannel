@@ -35,7 +35,6 @@ namespace MemoryEventBus.Infrastructure.Events
             }
             catch (Exception ex)
             {
-                // Keep Try* semantics: do not throw, just log and return false
                 _logger.LogError(ex, "Error publishing event {EventType} with ID {EventId}", typeof(TEvent).Name, @event.EventId);
                 _metrics?.RecordEventFailed<TEvent>(typeof(TEvent).Name, ex.GetType().Name);
                 return false;
