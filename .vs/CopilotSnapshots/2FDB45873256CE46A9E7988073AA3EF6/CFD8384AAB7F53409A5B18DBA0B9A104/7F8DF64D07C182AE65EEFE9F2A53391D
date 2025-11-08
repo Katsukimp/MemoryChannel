@@ -1,0 +1,24 @@
+﻿using MemoryEventBus.Domain.Events.Aggregate;
+using MemoryEventBus.Domain.Events.Concrete;
+using MemoryEventBus.Domain.Events.Interfaces.Base;
+using Microsoft.Extensions.Hosting;
+using System.Threading.Channels;
+
+namespace MemoryEventBus.Infrastructure.Events.Consumers
+{
+    public class StockReducerConsumer : BackgroundService
+    {
+        private readonly Channel<DomainEvent> _channel;
+
+        public StockReducerConsumer(IEventChannelManager channelManager)
+        {
+            _channel = channelManager.GetOrCreateChannel<OrderPaidEvent>();
+        }
+        protected override async Task ExecuteAsync(CancellationToken stoppingToken)
+        {
+            await foreach (var domainEvent in _channel.Reader.ReadAllAsync(stoppingToken))
+                if(domainEvent is OrderPaidEvent orderPaidEvent)
+                    Console.WriteLine($"Consumed OrderPaidEvent: {orderPaidEvent.EventName} | {orderPaidEvent.EventId}");
+        }
+    }
+}

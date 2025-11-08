@@ -1,0 +1,14 @@
+﻿namespace MemoryEventBus.Domain.Events.Configuration
+{
+    public class EventBusOptions
+    {
+        public int DefaultChannelCapacity { get; set; } = 1000;
+        public bool UseBoundedChannels { get; set; } = false;
+        public int DefaultMaxRetryAttempts { get; set; } = 3;
+        public TimeSpan DefaultRetryBaseDelay { get; set; } = TimeSpan.FromMilliseconds(100);
+        public TimeSpan DefaultRetryMaxDelay { get; set; } = TimeSpan.FromSeconds(30);
+        
+        public Dictionary<string, int> EventTypeChannelCapacities { get; set; } = new();
+        public Dictionary<string, int> EventTypeMaxRetryAttempts { get; set; } = new();
+    }
+}

@@ -1,0 +1,267 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\eduar\\source\\repos\\MemoryEventBus\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{47277CFE-21A9-45D4-AA3F-E5617EEC55E4}|MemoryEventBus.Infrastructure\\MemoryEventBus.Infrastructure.csproj|c:\\users\\eduar\\source\\repos\\memoryeventbus\\memoryeventbus.infrastructure\\events\\consumers\\enhancedstockreducerconsumer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{47277CFE-21A9-45D4-AA3F-E5617EEC55E4}|MemoryEventBus.Infrastructure\\MemoryEventBus.Infrastructure.csproj|solutionrelative:memoryeventbus.infrastructure\\events\\consumers\\enhancedstockreducerconsumer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{47277CFE-21A9-45D4-AA3F-E5617EEC55E4}|MemoryEventBus.Infrastructure\\MemoryEventBus.Infrastructure.csproj|c:\\users\\eduar\\source\\repos\\memoryeventbus\\memoryeventbus.infrastructure\\events\\consumers\\stockreducerconsumer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{47277CFE-21A9-45D4-AA3F-E5617EEC55E4}|MemoryEventBus.Infrastructure\\MemoryEventBus.Infrastructure.csproj|solutionrelative:memoryeventbus.infrastructure\\events\\consumers\\stockreducerconsumer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{347AC697-97F0-4D66-87AF-4EF017B50CAD}|MemoryEventBus.Domain\\MemoryEventBus.Domain.csproj|c:\\users\\eduar\\source\\repos\\memoryeventbus\\memoryeventbus.domain\\events\\aggregate\\domainevent.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{347AC697-97F0-4D66-87AF-4EF017B50CAD}|MemoryEventBus.Domain\\MemoryEventBus.Domain.csproj|solutionrelative:memoryeventbus.domain\\events\\aggregate\\domainevent.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{347AC697-97F0-4D66-87AF-4EF017B50CAD}|MemoryEventBus.Domain\\MemoryEventBus.Domain.csproj|c:\\users\\eduar\\source\\repos\\memoryeventbus\\memoryeventbus.domain\\events\\concrete\\orderpaidevent.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{347AC697-97F0-4D66-87AF-4EF017B50CAD}|MemoryEventBus.Domain\\MemoryEventBus.Domain.csproj|solutionrelative:memoryeventbus.domain\\events\\concrete\\orderpaidevent.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{347AC697-97F0-4D66-87AF-4EF017B50CAD}|MemoryEventBus.Domain\\MemoryEventBus.Domain.csproj|c:\\users\\eduar\\source\\repos\\memoryeventbus\\memoryeventbus.domain\\events\\configuration\\eventbusoptions.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{347AC697-97F0-4D66-87AF-4EF017B50CAD}|MemoryEventBus.Domain\\MemoryEventBus.Domain.csproj|solutionrelative:memoryeventbus.domain\\events\\configuration\\eventbusoptions.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{347AC697-97F0-4D66-87AF-4EF017B50CAD}|MemoryEventBus.Domain\\MemoryEventBus.Domain.csproj|c:\\users\\eduar\\source\\repos\\memoryeventbus\\memoryeventbus.domain\\events\\eventchannelmanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{347AC697-97F0-4D66-87AF-4EF017B50CAD}|MemoryEventBus.Domain\\MemoryEventBus.Domain.csproj|solutionrelative:memoryeventbus.domain\\events\\eventchannelmanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{347AC697-97F0-4D66-87AF-4EF017B50CAD}|MemoryEventBus.Domain\\MemoryEventBus.Domain.csproj|c:\\users\\eduar\\source\\repos\\memoryeventbus\\memoryeventbus.domain\\usecases\\ipayusecase.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{347AC697-97F0-4D66-87AF-4EF017B50CAD}|MemoryEventBus.Domain\\MemoryEventBus.Domain.csproj|solutionrelative:memoryeventbus.domain\\usecases\\ipayusecase.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{9ECF5135-D362-4B72-838D-D246BEBA221B}|MemoryEventBus\\MemoryEventBus.Presentation.csproj|c:\\users\\eduar\\source\\repos\\memoryeventbus\\memoryeventbus\\formatter\\logging\\customconsoleformatter.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{9ECF5135-D362-4B72-838D-D246BEBA221B}|MemoryEventBus\\MemoryEventBus.Presentation.csproj|solutionrelative:memoryeventbus\\formatter\\logging\\customconsoleformatter.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{47277CFE-21A9-45D4-AA3F-E5617EEC55E4}|MemoryEventBus.Infrastructure\\MemoryEventBus.Infrastructure.csproj|c:\\users\\eduar\\source\\repos\\memoryeventbus\\memoryeventbus.infrastructure\\events\\enhancedeventchannelmanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{47277CFE-21A9-45D4-AA3F-E5617EEC55E4}|MemoryEventBus.Infrastructure\\MemoryEventBus.Infrastructure.csproj|solutionrelative:memoryeventbus.infrastructure\\events\\enhancedeventchannelmanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{47277CFE-21A9-45D4-AA3F-E5617EEC55E4}|MemoryEventBus.Infrastructure\\MemoryEventBus.Infrastructure.csproj|c:\\users\\eduar\\source\\repos\\memoryeventbus\\memoryeventbus.infrastructure\\events\\retrypolicies\\retrypolicies.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{47277CFE-21A9-45D4-AA3F-E5617EEC55E4}|MemoryEventBus.Infrastructure\\MemoryEventBus.Infrastructure.csproj|solutionrelative:memoryeventbus.infrastructure\\events\\retrypolicies\\retrypolicies.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{9ECF5135-D362-4B72-838D-D246BEBA221B}|MemoryEventBus\\MemoryEventBus.Presentation.csproj|c:\\users\\eduar\\source\\repos\\memoryeventbus\\memoryeventbus\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{9ECF5135-D362-4B72-838D-D246BEBA221B}|MemoryEventBus\\MemoryEventBus.Presentation.csproj|solutionrelative:memoryeventbus\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 15,
+          "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{269a02dc-6af8-11d3-bdc4-00c04f688e50}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{2c599fff-5f57-3bef-ad08-aa97d7b7796a}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:130:0:{1fc202d4-d401-403c-9834-5b218574bb67}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:133:0:{1fc202d4-d401-403c-9834-5b218574bb67}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:131:0:{1fc202d4-d401-403c-9834-5b218574bb67}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:132:0:{1fc202d4-d401-403c-9834-5b218574bb67}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:130:0:{116d2292-e37d-41cd-a077-ebacac4c8cc4}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:134:0:{1fc202d4-d401-403c-9834-5b218574bb67}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:132:0:{116d2292-e37d-41cd-a077-ebacac4c8cc4}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:134:0:{116d2292-e37d-41cd-a077-ebacac4c8cc4}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:136:0:{1fc202d4-d401-403c-9834-5b218574bb67}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:135:0:{1fc202d4-d401-403c-9834-5b218574bb67}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:137:0:{1fc202d4-d401-403c-9834-5b218574bb67}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:138:0:{1fc202d4-d401-403c-9834-5b218574bb67}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{40ea2e6b-2121-4bb8-a43e-c83c04b51041}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "EnhancedStockReducerConsumer.cs",
+              "DocumentMoniker": "C:\\Users\\eduar\\source\\repos\\MemoryEventBus\\MemoryEventBus.Infrastructure\\Events\\Consumers\\EnhancedStockReducerConsumer.cs",
+              "RelativeDocumentMoniker": "MemoryEventBus.Infrastructure\\Events\\Consumers\\EnhancedStockReducerConsumer.cs",
+              "ToolTip": "C:\\Users\\eduar\\source\\repos\\MemoryEventBus\\MemoryEventBus.Infrastructure\\Events\\Consumers\\EnhancedStockReducerConsumer.cs",
+              "RelativeToolTip": "MemoryEventBus.Infrastructure\\Events\\Consumers\\EnhancedStockReducerConsumer.cs",
+              "ViewState": "AgIAAC8AAAAAAAAAAAAwwAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-04T14:40:14.8Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "StockReducerConsumer.cs",
+              "DocumentMoniker": "C:\\Users\\eduar\\source\\repos\\MemoryEventBus\\MemoryEventBus.Infrastructure\\Events\\Consumers\\StockReducerConsumer.cs",
+              "RelativeDocumentMoniker": "MemoryEventBus.Infrastructure\\Events\\Consumers\\StockReducerConsumer.cs",
+              "ToolTip": "C:\\Users\\eduar\\source\\repos\\MemoryEventBus\\MemoryEventBus.Infrastructure\\Events\\Consumers\\StockReducerConsumer.cs",
+              "RelativeToolTip": "MemoryEventBus.Infrastructure\\Events\\Consumers\\StockReducerConsumer.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-04T14:40:13.795Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "EventChannelManager.cs",
+              "DocumentMoniker": "C:\\Users\\eduar\\source\\repos\\MemoryEventBus\\MemoryEventBus.Domain\\Events\\EventChannelManager.cs",
+              "RelativeDocumentMoniker": "MemoryEventBus.Domain\\Events\\EventChannelManager.cs",
+              "ToolTip": "C:\\Users\\eduar\\source\\repos\\MemoryEventBus\\MemoryEventBus.Domain\\Events\\EventChannelManager.cs",
+              "RelativeToolTip": "MemoryEventBus.Domain\\Events\\EventChannelManager.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-04T14:40:09.792Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "IPayUseCase.cs",
+              "DocumentMoniker": "C:\\Users\\eduar\\source\\repos\\MemoryEventBus\\MemoryEventBus.Domain\\UseCases\\IPayUseCase.cs",
+              "RelativeDocumentMoniker": "MemoryEventBus.Domain\\UseCases\\IPayUseCase.cs",
+              "ToolTip": "C:\\Users\\eduar\\source\\repos\\MemoryEventBus\\MemoryEventBus.Domain\\UseCases\\IPayUseCase.cs",
+              "RelativeToolTip": "MemoryEventBus.Domain\\UseCases\\IPayUseCase.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-04T14:40:09.126Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "CustomConsoleFormatter.cs",
+              "DocumentMoniker": "C:\\Users\\eduar\\source\\repos\\MemoryEventBus\\MemoryEventBus\\Formatter\\Logging\\CustomConsoleFormatter.cs",
+              "RelativeDocumentMoniker": "MemoryEventBus\\Formatter\\Logging\\CustomConsoleFormatter.cs",
+              "ToolTip": "C:\\Users\\eduar\\source\\repos\\MemoryEventBus\\MemoryEventBus\\Formatter\\Logging\\CustomConsoleFormatter.cs",
+              "RelativeToolTip": "MemoryEventBus\\Formatter\\Logging\\CustomConsoleFormatter.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABUAAABDAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-04T14:32:34.512Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "EnhancedEventChannelManager.cs",
+              "DocumentMoniker": "C:\\Users\\eduar\\source\\repos\\MemoryEventBus\\MemoryEventBus.Infrastructure\\Events\\EnhancedEventChannelManager.cs",
+              "RelativeDocumentMoniker": "MemoryEventBus.Infrastructure\\Events\\EnhancedEventChannelManager.cs",
+              "ToolTip": "C:\\Users\\eduar\\source\\repos\\MemoryEventBus\\MemoryEventBus.Infrastructure\\Events\\EnhancedEventChannelManager.cs",
+              "RelativeToolTip": "MemoryEventBus.Infrastructure\\Events\\EnhancedEventChannelManager.cs",
+              "ViewState": "AgIAAAYAAAAAAAAAAAAAABwAAAAUAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-03T13:33:44.208Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "RetryPolicies.cs",
+              "DocumentMoniker": "C:\\Users\\eduar\\source\\repos\\MemoryEventBus\\MemoryEventBus.Infrastructure\\Events\\RetryPolicies\\RetryPolicies.cs",
+              "RelativeDocumentMoniker": "MemoryEventBus.Infrastructure\\Events\\RetryPolicies\\RetryPolicies.cs",
+              "ToolTip": "C:\\Users\\eduar\\source\\repos\\MemoryEventBus\\MemoryEventBus.Infrastructure\\Events\\RetryPolicies\\RetryPolicies.cs",
+              "RelativeToolTip": "MemoryEventBus.Infrastructure\\Events\\RetryPolicies\\RetryPolicies.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-03T13:33:43.645Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "EventBusOptions.cs",
+              "DocumentMoniker": "C:\\Users\\eduar\\source\\repos\\MemoryEventBus\\MemoryEventBus.Domain\\Events\\Configuration\\EventBusOptions.cs",
+              "RelativeDocumentMoniker": "MemoryEventBus.Domain\\Events\\Configuration\\EventBusOptions.cs",
+              "ToolTip": "C:\\Users\\eduar\\source\\repos\\MemoryEventBus\\MemoryEventBus.Domain\\Events\\Configuration\\EventBusOptions.cs",
+              "RelativeToolTip": "MemoryEventBus.Domain\\Events\\Configuration\\EventBusOptions.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAAFAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-03T13:33:27.165Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "OrderPaidEvent.cs",
+              "DocumentMoniker": "C:\\Users\\eduar\\source\\repos\\MemoryEventBus\\MemoryEventBus.Domain\\Events\\Concrete\\OrderPaidEvent.cs",
+              "RelativeDocumentMoniker": "MemoryEventBus.Domain\\Events\\Concrete\\OrderPaidEvent.cs",
+              "ToolTip": "C:\\Users\\eduar\\source\\repos\\MemoryEventBus\\MemoryEventBus.Domain\\Events\\Concrete\\OrderPaidEvent.cs",
+              "RelativeToolTip": "MemoryEventBus.Domain\\Events\\Concrete\\OrderPaidEvent.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-03T13:33:26.562Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "DomainEvent.cs",
+              "DocumentMoniker": "C:\\Users\\eduar\\source\\repos\\MemoryEventBus\\MemoryEventBus.Domain\\Events\\Aggregate\\DomainEvent.cs",
+              "RelativeDocumentMoniker": "MemoryEventBus.Domain\\Events\\Aggregate\\DomainEvent.cs",
+              "ToolTip": "C:\\Users\\eduar\\source\\repos\\MemoryEventBus\\MemoryEventBus.Domain\\Events\\Aggregate\\DomainEvent.cs",
+              "RelativeToolTip": "MemoryEventBus.Domain\\Events\\Aggregate\\DomainEvent.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-03T13:33:25.675Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
+              "Title": "Program.cs",
+              "DocumentMoniker": "C:\\Users\\eduar\\source\\repos\\MemoryEventBus\\MemoryEventBus\\Program.cs",
+              "RelativeDocumentMoniker": "MemoryEventBus\\Program.cs",
+              "ToolTip": "C:\\Users\\eduar\\source\\repos\\MemoryEventBus\\MemoryEventBus\\Program.cs",
+              "RelativeToolTip": "MemoryEventBus\\Program.cs",
+              "ViewState": "AgIAABIAAAAAAAAAAAAAAA4AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-03T13:23:48.277Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

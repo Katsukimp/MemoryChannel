@@ -1,18 +1,18 @@
-# MemoryEventBus - High-Performance In-Memory Event Bus
+﻿# MemoryEventBus - High-Performance In-Memory Event Bus
 
-## Vis�o Geral
+## Visão Geral
 
-Uma implementa��o customizada de Event Bus baseada em `System.Threading.Channels` que oferece performance superior ao MediatR para cen�rios de alta throughput, com funcionalidades opcionais avan�adas.
+Uma implementação customizada de Event Bus baseada em `System.Threading.Channels` que oferece performance superior ao MediatR para cenários de alta throughput, com funcionalidades opcionais avançadas.
 
 ## Funcionalidades Implementadas
 
-### ? Vers�o B�sica (Funcional)
+### ✅ Versão Básica (Funcional)
 - [x] **Event Channel Manager** - Gerenciamento de channels com `ConcurrentDictionary`
-- [x] **Producers/Consumers** - Publica��o e consumo ass�ncrono de eventos
-- [x] **Domain Events** - Implementa��o baseada em DDD
+- [x] **Producers/Consumers** - Publicação e consumo assíncrono de eventos
+- [x] **Domain Events** - Implementação baseada em DDD
 - [x] **Performance Otimizada** - Usando `Channel.CreateUnbounded` para alta performance
 
-### ? Funcionalidades Avan�adas (Opcionais)
+### ✅ Funcionalidades Avançadas (Opcionais)
 - [x] **Error Handling Centralizado** - `IEventBusErrorHandler` e `DefaultEventBusErrorHandler`
 - [x] **Retry Policies** - `ExponentialBackoffRetryPolicy` e `LinearRetryPolicy`
 - [x] **Metrics/Observability** - Usando `System.Diagnostics.Metrics` (.NET 8)
@@ -20,7 +20,7 @@ Uma implementa��o customizada de Event Bus baseada em `System.Threading.Channels
 
 ## Como Usar
 
-### Configura��o B�sica (Recomendada para come�ar)
+### Configuração Básica (Recomendada para começar)
 
 No `appsettings.json`:
 ```json
@@ -31,7 +31,7 @@ No `appsettings.json`:
 }
 ```
 
-### Configura��o Avan�ada (Com todas as funcionalidades)
+### Configuração Avançada (Com todas as funcionalidades)
 
 No `appsettings.json`:
 ```json
@@ -50,26 +50,26 @@ No `appsettings.json`:
 ## Arquitetura
 
 ```
-???????????????????    ????????????????????    ???????????????????
-?   Producer      ??????  EventChannel    ??????   Consumer      ?
-?                 ?    ?   Manager        ?    ?                 ?
-???????????????????    ????????????????????    ???????????????????
-        ?                        ?                        ?
-        ?                        ?                        ?
-???????????????????    ????????????????????    ???????????????????
-? Error Handler   ?    ?    Metrics       ?    ? Retry Policy    ?
-?                 ?    ?                  ?    ?                 ?
-???????????????????    ????????????????????    ???????????????????
+┌─────────────────┐    ┌──────────────────┐    ┌─────────────────┐
+│   Producer      │───▶│  EventChannel    │───▶│   Consumer      │
+│                 │    │   Manager        │    │                 │
+└─────────────────┘    └──────────────────┘    └─────────────────┘
+        │                        │                        │
+        ▼                        ▼                        ▼
+┌─────────────────┐    ┌──────────────────┐    ┌─────────────────┐
+│ Error Handler   │    │    Metrics       │    │ Retry Policy    │
+│                 │    │                  │    │                 │
+└─────────────────┘    └──────────────────┘    └─────────────────┘
 ```
 
 ## Performance vs MediatR
 
-| M�trica | MemoryEventBus | MediatR |
+| Métrica | MemoryEventBus | MediatR |
 |---------|----------------|---------|
 | Throughput | ~10-50x maior | Baseline |
-| Lat�ncia | Muito baixa | Baixa |
+| Latência | Muito baixa | Baixa |
 | Memory | Menor overhead | Maior overhead |
-| Reflection | M�nima | Extensiva |
+| Reflection | Mínima | Extensiva |
 
 ## Exemplo de Uso
 
@@ -131,13 +131,13 @@ public async Task HandleErrorAsync<TEvent>(TEvent @event, Exception exception, i
 public Channel<DomainEvent> GetOrCreateBoundedChannel<TEvent>(int capacity) where TEvent : DomainEvent
 ```
 
-## Conclus�o
+## Conclusão
 
-Esta implementa��o oferece uma alternativa de alta performance ao MediatR, especialmente adequada para:
+Esta implementação oferece uma alternativa de alta performance ao MediatR, especialmente adequada para:
 
-- ? **Microsservi�os de alta throughput**
-- ? **Sistemas com requisitos rigorosos de lat�ncia**
-- ? **Cen�rios onde controle fino sobre o processamento � necess�rio**
-- ? **Aplica��es que precisam de observabilidade detalhada**
+- ✅ **Microsserviços de alta throughput**
+- ✅ **Sistemas com requisitos rigorosos de latência**
+- ✅ **Cenários onde controle fino sobre o processamento é necessário**
+- ✅ **Aplicações que precisam de observabilidade detalhada**
 
-Para projetos que requerem funcionalidades mais complexas de pipeline (valida��o, autoriza��o, etc.), o MediatR ainda pode ser mais apropriado.
+Para projetos que requerem funcionalidades mais complexas de pipeline (validação, autorização, etc.), o MediatR ainda pode ser mais apropriado.

@@ -1,0 +1,10 @@
+﻿using MemoryEventBus.Domain.Events.Aggregate;
+using System.Threading.Channels;
+
+namespace MemoryEventBus.Domain.Events.Interfaces.Base
+{
+    public interface IEventChannelManager
+    {
+        Channel<DomainEvent> GetOrCreateChannel<TEvent>() where TEvent : DomainEvent;
+    }
+}

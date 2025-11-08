@@ -1,0 +1,54 @@
+using MemoryEventBus.Domain.Events.Interfaces.Base;
+
+namespace MemoryEventBus.Infrastructure.Events.RetryPolicies
+{
+    public class ExponentialBackoffRetryPolicy : IRetryPolicy
+    {
+        private readonly int _maxAttempts;
+        private readonly TimeSpan _baseDelay;
+        private readonly TimeSpan _maxDelay;
+
+        public ExponentialBackoffRetryPolicy(int maxAttempts = 3, TimeSpan? baseDelay = null, TimeSpan? maxDelay = null)
+        {
+            _maxAttempts = maxAttempts;
+            _baseDelay = baseDelay ?? TimeSpan.FromMilliseconds(100);
+            _maxDelay = maxDelay ?? TimeSpan.FromSeconds(30);
+        }
+
+        public TimeSpan GetDelay(int attemptNumber)
+        {
+            var delay = TimeSpan.FromMilliseconds(_baseDelay.TotalMilliseconds * Math.Pow(2, attemptNumber - 1));
+            return delay > _maxDelay ? _maxDelay : delay;
+        }
+
+        public bool ShouldRetry(int attemptNumber, Exception exception)
+        {
+            if (exception is ArgumentException or ArgumentNullException or InvalidOperationException)
+                return false;
+
+            return attemptNumber <= _maxAttempts;
+        }
+    }
+
+    public class LinearRetryPolicy : IRetryPolicy
+    {
+        private readonly int _maxAttempts;
+        private readonly TimeSpan _delay;
+
+        public LinearRetryPolicy(int maxAttempts = 3, TimeSpan? delay = null)
+        {
+            _maxAttempts = maxAttempts;
+            _delay = delay ?? TimeSpan.FromMilliseconds(500);
+        }
+
+        public TimeSpan GetDelay(int attemptNumber) => _delay;
+
+        public bool ShouldRetry(int attemptNumber, Exception exception)
+        {
+            if (exception is ArgumentException or ArgumentNullException or InvalidOperationException)
+                return false;
+
+            return attemptNumber <= _maxAttempts;
+        }
+    }
+}

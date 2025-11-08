@@ -1,0 +1,15 @@
+C:\Users\eduar\source\repos\MemoryEventBus\MemoryEventBus.Application\bin\Debug\net8.0\MemoryEventBus.Application.deps.json
+C:\Users\eduar\source\repos\MemoryEventBus\MemoryEventBus.Application\bin\Debug\net8.0\MemoryEventBus.Application.dll
+C:\Users\eduar\source\repos\MemoryEventBus\MemoryEventBus.Application\bin\Debug\net8.0\MemoryEventBus.Application.pdb
+C:\Users\eduar\source\repos\MemoryEventBus\MemoryEventBus.Application\bin\Debug\net8.0\MemoryEventBus.Domain.dll
+C:\Users\eduar\source\repos\MemoryEventBus\MemoryEventBus.Application\bin\Debug\net8.0\MemoryEventBus.Domain.pdb
+C:\Users\eduar\source\repos\MemoryEventBus\MemoryEventBus.Application\obj\Debug\net8.0\MemoryEventBus.Application.csproj.AssemblyReference.cache
+C:\Users\eduar\source\repos\MemoryEventBus\MemoryEventBus.Application\obj\Debug\net8.0\MemoryEventBus.Application.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\eduar\source\repos\MemoryEventBus\MemoryEventBus.Application\obj\Debug\net8.0\MemoryEventBus.Application.AssemblyInfoInputs.cache
+C:\Users\eduar\source\repos\MemoryEventBus\MemoryEventBus.Application\obj\Debug\net8.0\MemoryEventBus.Application.AssemblyInfo.cs
+C:\Users\eduar\source\repos\MemoryEventBus\MemoryEventBus.Application\obj\Debug\net8.0\MemoryEventBus.Application.csproj.CoreCompileInputs.cache
+C:\Users\eduar\source\repos\MemoryEventBus\MemoryEventBus.Application\obj\Debug\net8.0\MemoryEv.54DA68CC.Up2Date
+C:\Users\eduar\source\repos\MemoryEventBus\MemoryEventBus.Application\obj\Debug\net8.0\MemoryEventBus.Application.dll
+C:\Users\eduar\source\repos\MemoryEventBus\MemoryEventBus.Application\obj\Debug\net8.0\refint\MemoryEventBus.Application.dll
+C:\Users\eduar\source\repos\MemoryEventBus\MemoryEventBus.Application\obj\Debug\net8.0\MemoryEventBus.Application.pdb
+C:\Users\eduar\source\repos\MemoryEventBus\MemoryEventBus.Application\obj\Debug\net8.0\ref\MemoryEventBus.Application.dll

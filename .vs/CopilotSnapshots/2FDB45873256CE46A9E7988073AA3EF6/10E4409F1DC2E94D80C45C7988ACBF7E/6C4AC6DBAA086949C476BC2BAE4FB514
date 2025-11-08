@@ -1,0 +1,38 @@
+﻿using MemoryEventBus.Domain.Events.Concrete;
+using MemoryEventBus.Domain.Events.Interfaces.Base;
+using MemoryEventBus.Domain.Events.Interfaces.Producers;
+
+namespace MemoryEventBus.Infrastructure.Events.Producers
+{
+    public class OrderPaidProducer : IOrderPaidProducer
+    {
+        private readonly IEventChannelManager _channelManager;
+
+        public OrderPaidProducer(IEventChannelManager channelManager)
+        {
+            _channelManager = channelManager;
+        }
+
+        public async Task PublishAsync(OrderPaidEvent @event)
+        {
+            try
+            {
+                var success = await _channelManager.TryWriteAsync(@event);
+                
+                if (success)
+                {
+                    Console.WriteLine("Sent message for OrderPaidTopic.");
+                }
+                else
+                {
+                    Console.WriteLine($"Failed to publish OrderPaidEvent {@event.EventId}");
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error publishing OrderPaidEvent {@event.EventId}: {ex.Message}");
+                throw;
+            }
+        }
+    }
+}

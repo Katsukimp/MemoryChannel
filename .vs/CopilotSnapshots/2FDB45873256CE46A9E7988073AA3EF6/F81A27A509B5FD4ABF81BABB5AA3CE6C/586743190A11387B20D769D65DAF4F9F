@@ -1,0 +1,16 @@
+﻿{
+  "Logging": {
+    "LogLevel": {
+      "Default": "Debug",
+      "Microsoft.AspNetCore": "Information",
+      "Microsoft.EntityFrameworkCore": "Information",
+      "MemoryEventBus": "Trace",
+      "MemoryEventBus.Infrastructure.Events": "Debug"
+    },
+    "Console": {
+      "TimestampFormat": "[HH:mm:ss.fff] ",
+      "LogToStandardErrorThreshold": "Warning",
+      "Format": "Default"
+    }
+  }
+}

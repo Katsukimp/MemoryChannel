@@ -1,0 +1,53 @@
+﻿using MemoryEventBus.Domain.Entities;
+using MemoryEventBus.Domain.Events.Concrete;
+using MemoryEventBus.Domain.Events.Interfaces.Producers;
+using MemoryEventBus.Domain.UseCases;
+using System;
+using System.Linq;
+using System.Threading.Tasks;
+
+namespace MemoryEventBus.Application.UseCases
+{
+    public class PayUseCase : IPayUseCase
+    {
+        private readonly IOrderPaidProducer _orderPaidProducer;
+        public PayUseCase(IOrderPaidProducer orderPaidProducer)
+        {
+            _orderPaidProducer = orderPaidProducer;
+        }
+        public async Task<Order?> ExecuteAsync(decimal amount)
+        {
+            try
+            {
+                var order = new Order
+                {
+                    TotalAmount = 100.00m
+                };
+
+                Console.WriteLine($"Processing payment of amount: {amount} - Id: {order.Id}");
+                order.Pay(amount);
+
+                // Fix: Use Task.WhenAll instead of Parallel.ForEach for async operations
+                var publishTasks = order.GetDomainEvents()
+                    .OfType<OrderPaidEvent>()
+                    .Select(domainEvent => _orderPaidProducer.PublishAsync(domainEvent));
+
+                await Task.WhenAll(publishTasks);
+
+                order.ClearEvents(); // Clear events after publishing
+
+                return order;
+            }
+            catch (AggregateException exception)
+            {
+                Console.WriteLine($"Failed to pay order - {exception.Message}");
+                return null;
+            }
+            catch (Exception exception)
+            {
+                Console.WriteLine($"Error in process - {exception.Message}");
+                return null;
+            }
+        }
+    }
+}

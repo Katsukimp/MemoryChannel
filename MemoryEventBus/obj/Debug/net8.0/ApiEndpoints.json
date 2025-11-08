@@ -1,0 +1,18 @@
+[
+  {
+    "ContainingType": "MemoryEventBus.Presentation.Controllers.OrderController",
+    "Method": "ProcessPaymentAsync",
+    "RelativePath": "api/v1/Order/process-payment",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "amount",
+        "Type": "System.Decimal",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  }
+]

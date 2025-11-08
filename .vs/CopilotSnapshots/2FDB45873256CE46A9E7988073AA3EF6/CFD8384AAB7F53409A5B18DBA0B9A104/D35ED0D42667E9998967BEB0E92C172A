@@ -1,0 +1,13 @@
+﻿using System.Diagnostics.Metrics;
+
+namespace MemoryEventBus.Domain.Events.Interfaces.Base
+{
+    public interface IEventBusMetrics
+    {
+        void RecordEventPublished<TEvent>(string eventType);
+        void RecordEventConsumed<TEvent>(string eventType, TimeSpan processingTime);
+        void RecordEventFailed<TEvent>(string eventType, string errorType);
+        void RecordRetryAttempt<TEvent>(string eventType, int attemptNumber);
+        void RecordChannelDepth(string channelType, int depth);
+    }
+}

@@ -1,0 +1,8 @@
+namespace MemoryEventBus.Domain.Events.Interfaces.Base
+{
+    public interface IRetryPolicy
+    {
+        TimeSpan GetDelay(int attemptNumber);
+        bool ShouldRetry(int attemptNumber, Exception exception);
+    }
+}

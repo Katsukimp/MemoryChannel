@@ -1,0 +1,50 @@
+﻿using MemoryEventBus.Application.UseCases;
+using MemoryEventBus.Domain.Events;
+using MemoryEventBus.Domain.Events.Interfaces.Base;
+using MemoryEventBus.Domain.Events.Interfaces.Producers;
+using MemoryEventBus.Domain.UseCases;
+using MemoryEventBus.Infrastructure.Events.Consumers;
+using MemoryEventBus.Infrastructure.Events.Producers;
+using MemoryEventBus.Infrastructure.Events.ErrorHandling;
+using MemoryEventBus.Infrastructure.Events.RetryPolicies;
+using MemoryEventBus.Infrastructure.Events.Metrics;
+
+var builder = WebApplication.CreateBuilder(args);
+
+// Add services to the container.
+builder.Services.AddControllers();
+// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
+builder.Services.AddEndpointsApiExplorer();
+builder.Services.AddSwaggerGen();
+
+// Event Bus Infrastructure
+builder.Services.AddSingleton<IEventChannelManager, EventChannelManager>();
+builder.Services.AddSingleton<IEventBusMetrics, EventBusMetrics>();
+builder.Services.AddSingleton<IEventBusErrorHandler, DefaultEventBusErrorHandler>();
+builder.Services.AddSingleton<IRetryPolicy, ExponentialBackoffRetryPolicy>();
+
+// Producers
+builder.Services.AddScoped<IOrderPaidProducer, OrderPaidProducer>();
+
+// Consumers - Background Services
+builder.Services.AddHostedService<StockReducerConsumer>();
+
+// Use Cases
+builder.Services.AddScoped<IPayUseCase, PayUseCase>();
+
+var app = builder.Build();
+
+// Configure the HTTP request pipeline.
+if (app.Environment.IsDevelopment())
+{
+    app.UseSwagger();
+    app.UseSwaggerUI();
+}
+
+app.UseHttpsRedirection();
+
+app.UseAuthorization();
+
+app.MapControllers();
+
+app.Run();

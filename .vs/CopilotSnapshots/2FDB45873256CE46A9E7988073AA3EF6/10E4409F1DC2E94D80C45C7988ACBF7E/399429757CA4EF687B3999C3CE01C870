@@ -1,0 +1,52 @@
+﻿using MemoryEventBus.Domain.Events.Concrete;
+using MemoryEventBus.Domain.Events.Interfaces.Base;
+using MemoryEventBus.Domain.Events.Interfaces.Producers;
+using Microsoft.Extensions.Logging;
+
+namespace MemoryEventBus.Infrastructure.Events.Producers
+{
+    public class EnhancedOrderPaidProducer : IOrderPaidProducer
+    {
+        private readonly IEventChannelManager _channelManager;
+        private readonly ILogger<EnhancedOrderPaidProducer> _logger;
+        private readonly IEventBusMetrics? _metrics;
+
+        public EnhancedOrderPaidProducer(
+            IEventChannelManager channelManager, 
+            ILogger<EnhancedOrderPaidProducer> logger,
+            IEventBusMetrics? metrics = null)
+        {
+            _channelManager = channelManager;
+            _logger = logger;
+            _metrics = metrics;
+        }
+
+        public async Task PublishAsync(OrderPaidEvent @event)
+        {
+            try
+            {
+                var success = await _channelManager.TryWriteAsync(@event);
+                
+                if (success)
+                {
+                    _logger.LogDebug("Successfully published OrderPaidEvent {EventId}", @event.EventId);
+                    _metrics?.RecordEventPublished<OrderPaidEvent>(typeof(OrderPaidEvent).Name);
+                    Console.WriteLine("Sent message for OrderPaidTopic.");
+                }
+                else
+                {
+                    _logger.LogError("Failed to publish OrderPaidEvent {EventId} - channel write failed", @event.EventId);
+                    _metrics?.RecordEventFailed<OrderPaidEvent>(typeof(OrderPaidEvent).Name, "ChannelWriteFailed");
+                    Console.WriteLine($"Failed to publish OrderPaidEvent {@event.EventId}");
+                }
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Error publishing OrderPaidEvent {EventId}", @event.EventId);
+                _metrics?.RecordEventFailed<OrderPaidEvent>(typeof(OrderPaidEvent).Name, ex.GetType().Name);
+                Console.WriteLine($"Error publishing OrderPaidEvent {@event.EventId}: {ex.Message}");
+                throw;
+            }
+        }
+    }
+}
