@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.14.36202.13
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MemoryEventBus.Presentation", "MemoryEventBus\MemoryEventBus.Presentation.csproj", "{9ECF5135-D362-4B72-838D-D246BEBA221B}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MemoryEventBus.Presentation", "MemoryEventBus.Presentation\MemoryEventBus.Presentation.csproj", "{9ECF5135-D362-4B72-838D-D246BEBA221B}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MemoryEventBus.Domain", "MemoryEventBus.Domain\MemoryEventBus.Domain.csproj", "{347AC697-97F0-4D66-87AF-4EF017B50CAD}"
 EndProject
