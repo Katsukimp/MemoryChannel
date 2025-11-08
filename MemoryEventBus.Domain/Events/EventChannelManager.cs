@@ -9,7 +9,7 @@ namespace MemoryEventBus.Domain.Events
     {
         private readonly ConcurrentDictionary<Type, Channel<DomainEvent>> _channels = new();
         
-        public Channel<DomainEvent> GetOrCreateChannel<TEvent>() where TEvent : DomainEvent
+        public virtual Channel<DomainEvent> GetOrCreateChannel<TEvent>() where TEvent : DomainEvent
         {
             return _channels.GetOrAdd(typeof(TEvent), _ => 
             {
@@ -24,7 +24,7 @@ namespace MemoryEventBus.Domain.Events
             });
         }
 
-        public Channel<DomainEvent> GetOrCreateBoundedChannel<TEvent>(int capacity) where TEvent : DomainEvent
+        public virtual Channel<DomainEvent> GetOrCreateBoundedChannel<TEvent>(int capacity) where TEvent : DomainEvent
         {
             return _channels.GetOrAdd(typeof(TEvent), _ => 
             {
@@ -40,7 +40,7 @@ namespace MemoryEventBus.Domain.Events
             });
         }
 
-        public async Task<bool> TryWriteAsync<TEvent>(TEvent @event, CancellationToken cancellationToken = default) where TEvent : DomainEvent
+        public virtual async Task<bool> TryWriteAsync<TEvent>(TEvent @event, CancellationToken cancellationToken = default) where TEvent : DomainEvent
         {
             if (_channels.TryGetValue(typeof(TEvent), out var channel) is false)
                 return false;
@@ -60,7 +60,7 @@ namespace MemoryEventBus.Domain.Events
             }
         }
 
-        public int GetChannelDepth<TEvent>() where TEvent : DomainEvent
+        public virtual int GetChannelDepth<TEvent>() where TEvent : DomainEvent
         {
             if (_channels.TryGetValue(typeof(TEvent), out var channel))
             {
@@ -74,12 +74,12 @@ namespace MemoryEventBus.Domain.Events
             return 0;
         }
 
-        public void CloseChannel<TEvent>() where TEvent : DomainEvent
+        public virtual void CloseChannel<TEvent>() where TEvent : DomainEvent
         {
             if (_channels.TryRemove(typeof(TEvent), out var channel))
                 channel.Writer.Complete();
         }
 
-        public int GetChannelCount() => _channels.Count;
+        public virtual int GetChannelCount() => _channels.Count;
     }
 }
