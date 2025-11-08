@@ -20,6 +20,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{0AB3BF05
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MemoryEventBus.Tests", "tests\MemoryEventBus.Tests\MemoryEventBus.Tests.csproj", "{0F377061-5C47-4914-BA91-B3CF308AE470}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{6E236968-9869-4568-8AE0-AE0F4C492D46}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -83,6 +85,8 @@ Global
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
+		{347AC697-97F0-4D66-87AF-4EF017B50CAD} = {6E236968-9869-4568-8AE0-AE0F4C492D46}
+		{47277CFE-21A9-45D4-AA3F-E5617EEC55E4} = {6E236968-9869-4568-8AE0-AE0F4C492D46}
 		{8A6FD50C-1416-456A-8E08-DDEF169C8919} = {5D20AA90-6969-D8BD-9DCD-8634F4692FDA}
 		{0F377061-5C47-4914-BA91-B3CF308AE470} = {0AB3BF05-4346-4AA6-1389-037BE0695223}
 	EndGlobalSection
