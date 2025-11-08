@@ -56,3 +56,4 @@ nunit-*.xml
 #Solution Items
 .vs
 Solution Items
+.editorconfig
