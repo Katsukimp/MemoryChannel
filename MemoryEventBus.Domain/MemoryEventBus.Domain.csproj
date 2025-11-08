@@ -32,4 +32,11 @@
   <ItemGroup>
     <PackageReference Include="Microsoft.SourceLink.GitHub" Version="8.0.0" PrivateAssets="All" />
   </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Entities\Base\" />
+    <Folder Include="Events\Concrete\" />
+    <Folder Include="Events\Interfaces\Producers\" />
+    <Folder Include="UseCases\" />
+  </ItemGroup>
 </Project>

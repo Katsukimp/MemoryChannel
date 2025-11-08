@@ -36,4 +36,9 @@
   <ItemGroup>
     <ProjectReference Include="..\MemoryEventBus.Domain\MemoryEventBus.Domain.csproj" />
   </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Events\Producers\V1\" />
+    <Folder Include="Events\Producers\V2\" />
+  </ItemGroup>
 </Project>
