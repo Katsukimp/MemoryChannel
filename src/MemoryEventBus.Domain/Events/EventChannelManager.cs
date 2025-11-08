@@ -10,50 +10,53 @@ namespace MemoryEventBus.Domain.Events
     /// </summary>
     public class EventChannelManager : IEventChannelManager
     {
-        private readonly ConcurrentDictionary<Type, Channel<DomainEvent>> _channels = new();
+        private readonly ConcurrentDictionary<Type, object> _channels = new();
         
         /// <inheritdoc />
-        public virtual Channel<DomainEvent> GetOrCreateChannel<TEvent>() where TEvent : DomainEvent
+        public virtual Channel<TEvent> GetOrCreateChannel<TEvent>() where TEvent : DomainEvent
         {
-            return _channels.GetOrAdd(typeof(TEvent), _ => 
+            var channelObj = _channels.GetOrAdd(typeof(TEvent), _ => 
             {
-                var channel = Channel.CreateUnbounded<DomainEvent>(new UnboundedChannelOptions
+                var channel = Channel.CreateUnbounded<TEvent>(new UnboundedChannelOptions
                 {
                     SingleReader = false,
                     SingleWriter = false,
                     AllowSynchronousContinuations = false
                 });
-                
                 return channel;
             });
+
+            return (Channel<TEvent>)channelObj;
         }
 
         /// <inheritdoc />
-        public virtual Channel<DomainEvent> GetOrCreateBoundedChannel<TEvent>(int capacity) where TEvent : DomainEvent
+        public virtual Channel<TEvent> GetOrCreateBoundedChannel<TEvent>(int capacity) where TEvent : DomainEvent
         {
-            return _channels.GetOrAdd(typeof(TEvent), _ => 
+            var channelObj = _channels.GetOrAdd(typeof(TEvent), _ => 
             {
-                var channel = Channel.CreateBounded<DomainEvent>(new BoundedChannelOptions(capacity)
+                var channel = Channel.CreateBounded<TEvent>(new BoundedChannelOptions(capacity)
                 {
                     FullMode = BoundedChannelFullMode.Wait,
                     SingleReader = false,
                     SingleWriter = false,
                     AllowSynchronousContinuations = false
                 });
-                
                 return channel;
             });
+
+            return (Channel<TEvent>)channelObj;
         }
 
         /// <inheritdoc />
-        public virtual async Task<bool> TryWriteAsync<TEvent>(TEvent @event, CancellationToken cancellationToken = default) where TEvent : DomainEvent
+        public virtual async ValueTask<bool> TryWriteAsync<TEvent>(TEvent @event, CancellationToken cancellationToken = default) where TEvent : DomainEvent
         {
-            if (_channels.TryGetValue(typeof(TEvent), out var channel) is false)
+            if (_channels.TryGetValue(typeof(TEvent), out var channelObj) is false)
                 return false;
 
             try
             {
-                await channel.Writer.WriteAsync(@event, cancellationToken);
+                var channel = (Channel<TEvent>)channelObj;
+                await channel.Writer.WriteAsync(@event, cancellationToken).ConfigureAwait(false);
                 return true;
             }
             catch (OperationCanceledException)
@@ -69,8 +72,9 @@ namespace MemoryEventBus.Domain.Events
         /// <inheritdoc />
         public virtual int GetChannelDepth<TEvent>() where TEvent : DomainEvent
         {
-            if (_channels.TryGetValue(typeof(TEvent), out var channel))
+            if (_channels.TryGetValue(typeof(TEvent), out var channelObj))
             {
+                var channel = (Channel<TEvent>)channelObj;
                 var reader = channel.Reader;
 
                 if (reader.CanCount)
@@ -84,8 +88,11 @@ namespace MemoryEventBus.Domain.Events
         /// <inheritdoc />
         public virtual void CloseChannel<TEvent>() where TEvent : DomainEvent
         {
-            if (_channels.TryRemove(typeof(TEvent), out var channel))
+            if (_channels.TryRemove(typeof(TEvent), out var channelObj))
+            {
+                var channel = (Channel<TEvent>)channelObj;
                 channel.Writer.Complete();
+            }
         }
 
         /// <inheritdoc />

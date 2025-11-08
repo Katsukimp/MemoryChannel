@@ -7,26 +7,26 @@ using Xunit;
 
 public class ConcurrencyTests
 {
-    private sealed class TestEvent : DomainEvent { }
+ private sealed class TestEvent : DomainEvent { }
 
-    [Fact]
-    public async Task Publish_Parallel_ShouldSucceed()
-    {
-        var manager = new EventChannelManager();
-        manager.GetOrCreateChannel<TestEvent>();
+ [Fact]
+ public async Task Publish_Parallel_ShouldSucceed()
+ {
+ var manager = new EventChannelManager();
+ manager.GetOrCreateChannel<TestEvent>();
 
-        var tasks = Enumerable.Range(0,1000).Select(async i =>
-        {
-            var ok = await manager.TryWriteAsync(new TestEvent
-            {
-                EventId = i.ToString(),
-                EventName = "Test",
-                OccurredOn = DateTime.UtcNow
-            });
-            
-            Assert.True(ok);        
-        });
+ var tasks = Enumerable.Range(0,1000).Select(async i =>
+ {
+ var ok = await manager.TryWriteAsync(new TestEvent
+ {
+ EventId = i.ToString(),
+ EventName = "Test",
+ OccurredOn = DateTime.UtcNow
+ });
+ 
+ Assert.True(ok); 
+ });
 
-        await Task.WhenAll(tasks);
-    }
+ await Task.WhenAll(tasks);
+ }
 }
