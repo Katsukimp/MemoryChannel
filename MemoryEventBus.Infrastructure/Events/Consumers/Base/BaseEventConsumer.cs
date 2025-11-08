@@ -4,6 +4,7 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using System.Diagnostics;
 using System.Threading.Channels;
+using MemoryEventBus.Infrastructure.Events.Diagnostics;
 
 namespace MemoryEventBus.Infrastructure.Events.Consumers.Base
 {
@@ -14,19 +15,22 @@ namespace MemoryEventBus.Infrastructure.Events.Consumers.Base
         protected readonly IEventBusErrorHandler _errorHandler;
         protected readonly IRetryPolicy _retryPolicy;
         protected readonly IEventBusMetrics? _metrics;
+        protected readonly EventBusActivitySource? _activitySource;
 
         protected BaseEventConsumer(
             IEventChannelManager channelManager,
             ILogger<BaseEventConsumer<TEvent>> logger,
             IEventBusErrorHandler errorHandler,
             IRetryPolicy retryPolicy,
-            IEventBusMetrics? metrics = null)
+            IEventBusMetrics? metrics = null,
+            EventBusActivitySource? activitySource = null)
         {
             _channel = channelManager.GetOrCreateChannel<TEvent>();
             _logger = logger;
             _errorHandler = errorHandler;
             _retryPolicy = retryPolicy;
             _metrics = metrics;
+            _activitySource = activitySource;
         }
 
         protected override async Task ExecuteAsync(CancellationToken stoppingToken)
@@ -44,6 +48,7 @@ namespace MemoryEventBus.Infrastructure.Events.Consumers.Base
 
         private async Task ProcessWithRetryAsync(TEvent @event, CancellationToken cancellationToken)
         {
+            using var activity = _activitySource?.StartConsumeActivity(typeof(TEvent).Name);
             var stopwatch = Stopwatch.StartNew();
             var attemptNumber = 1;
 
@@ -54,12 +59,14 @@ namespace MemoryEventBus.Infrastructure.Events.Consumers.Base
                     await ProcessEventAsync(@event, cancellationToken);
                     stopwatch.Stop();
                     _metrics?.RecordEventConsumed<TEvent>(typeof(TEvent).Name, stopwatch.Elapsed);
+                    activity?.SetTag("eventbus.consume.success", true);
                     _logger.LogDebug("Successfully processed event {EventId} of type {EventType} in {ElapsedMs}ms", 
                         @event.EventId, typeof(TEvent).Name, stopwatch.ElapsedMilliseconds);
                     return;
                 }
                 catch (Exception ex)
                 {
+                    activity?.SetTag("eventbus.consume.error", ex.GetType().Name);
                     _logger.LogWarning(ex, "Error processing event {EventId} of type {EventType} on attempt {AttemptNumber}", 
                         @event.EventId, typeof(TEvent).Name, attemptNumber);
 
