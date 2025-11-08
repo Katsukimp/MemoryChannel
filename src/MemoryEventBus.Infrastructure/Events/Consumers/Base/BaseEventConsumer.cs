@@ -16,7 +16,7 @@ namespace MemoryEventBus.Infrastructure.Events.Consumers.Base
     public abstract class BaseEventConsumer<TEvent> : BackgroundService where TEvent : DomainEvent
     {
         /// <summary>Underlying channel used to read events.</summary>
-        protected readonly Channel<DomainEvent> _channel;
+        protected readonly Channel<TEvent> _channel;
         /// <summary>Logger for diagnostic output.</summary>
         protected readonly ILogger<BaseEventConsumer<TEvent>> _logger;
         /// <summary>Error handler invoked on processing failures.</summary>
@@ -27,6 +27,7 @@ namespace MemoryEventBus.Infrastructure.Events.Consumers.Base
         protected readonly IEventBusMetrics? _metrics;
         /// <summary>Optional activity source for tracing.</summary>
         protected readonly EventBusActivitySource? _activitySource;
+        private volatile bool _draining = false;
 
         /// <summary>
         /// Initializes a new instance of the consumer.
@@ -63,10 +64,10 @@ namespace MemoryEventBus.Infrastructure.Events.Consumers.Base
 
             await foreach (var domainEvent in _channel.Reader.ReadAllAsync(stoppingToken))
             {
-                if (domainEvent is TEvent typedEvent)
-                {
-                    await ProcessWithRetryAsync(typedEvent, stoppingToken);
-                }
+                if (_draining && stoppingToken.IsCancellationRequested)
+                    break; // Defensive break during drain if cancelled.
+
+                await ProcessWithRetryAsync(domainEvent, stoppingToken);
             }
         }
 
@@ -78,14 +79,20 @@ namespace MemoryEventBus.Infrastructure.Events.Consumers.Base
 
             while (true)
             {
+                cancellationToken.ThrowIfCancellationRequested();
                 try
                 {
-                    await ProcessEventAsync(@event, cancellationToken);
+                    await ProcessEventAsync(@event, cancellationToken).ConfigureAwait(false);
                     stopwatch.Stop();
                     _metrics?.RecordEventConsumed<TEvent>(typeof(TEvent).Name, stopwatch.Elapsed);
                     activity?.SetTag("eventbus.consume.success", true);
                     _logger.LogDebug("Successfully processed event {EventId} of type {EventType} in {ElapsedMs}ms",
                         @event.EventId, typeof(TEvent).Name, stopwatch.ElapsedMilliseconds);
+                    return;
+                }
+                catch (OperationCanceledException) when (cancellationToken.IsCancellationRequested)
+                {
+                    _logger.LogWarning("Cancellation requested while processing event {EventId} of type {EventType}", @event.EventId, typeof(TEvent).Name);
                     return;
                 }
                 catch (Exception ex)
@@ -94,7 +101,7 @@ namespace MemoryEventBus.Infrastructure.Events.Consumers.Base
                     _logger.LogWarning(ex, "Error processing event {EventId} of type {EventType} on attempt {AttemptNumber}",
                         @event.EventId, typeof(TEvent).Name, attemptNumber);
 
-                    await _errorHandler.HandleErrorAsync(@event, ex, attemptNumber, cancellationToken);
+                    await _errorHandler.HandleErrorAsync(@event, ex, attemptNumber, cancellationToken).ConfigureAwait(false);
 
                     if (!_retryPolicy.ShouldRetry(attemptNumber, ex))
                     {
@@ -109,10 +116,37 @@ namespace MemoryEventBus.Infrastructure.Events.Consumers.Base
                     _logger.LogInformation("Retrying event {EventId} in {DelayMs}ms (attempt {AttemptNumber})",
                         @event.EventId, delay.TotalMilliseconds, attemptNumber + 1);
 
-                    await Task.Delay(delay, cancellationToken);
+                    await Task.Delay(delay, cancellationToken).ConfigureAwait(false);
                     attemptNumber++;
                 }
             }
+        }
+
+        /// <summary>
+        /// Attempts a graceful drain of the channel before shutdown. Processes any remaining events until cancellation.
+        /// </summary>
+        /// <param name="cancellationToken">Cancellation token signaled for shutdown.</param>
+        public override async Task StopAsync(CancellationToken cancellationToken)
+        {
+            _draining = true;
+            _logger.LogInformation("Draining remaining events for {EventType} before shutdown", typeof(TEvent).Name);
+
+            // Drain pending events respecting cancellation.
+            while (_channel.Reader.TryRead(out var ev))
+            {
+                try
+                {
+                    await ProcessWithRetryAsync(ev, cancellationToken).ConfigureAwait(false);
+                }
+                catch (OperationCanceledException)
+                {
+                    _logger.LogWarning("Stop cancelled while draining events for {EventType}", typeof(TEvent).Name);
+                    break;
+                }
+            }
+
+            _logger.LogInformation("Drain completed for {EventType}", typeof(TEvent).Name);
+            await base.StopAsync(cancellationToken);
         }
 
         /// <summary>
@@ -120,6 +154,6 @@ namespace MemoryEventBus.Infrastructure.Events.Consumers.Base
         /// </summary>
         /// <param name="event">The event being processed.</param>
         /// <param name="cancellationToken">Cancellation token.</param>
-        protected abstract Task ProcessEventAsync(TEvent @event, CancellationToken cancellationToken);
+        protected abstract ValueTask ProcessEventAsync(TEvent @event, CancellationToken cancellationToken);
     }
 }

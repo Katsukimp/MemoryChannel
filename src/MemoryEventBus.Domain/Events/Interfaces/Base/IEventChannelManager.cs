@@ -12,14 +12,14 @@ namespace MemoryEventBus.Domain.Events.Interfaces.Base
         /// Gets an existing channel for the specified event type or creates an unbounded one if missing.
         /// </summary>
         /// <typeparam name="TEvent">The event type.</typeparam>
-        Channel<DomainEvent> GetOrCreateChannel<TEvent>() where TEvent : DomainEvent;
+        Channel<TEvent> GetOrCreateChannel<TEvent>() where TEvent : DomainEvent;
 
         /// <summary>
         /// Gets an existing channel for the specified event type or creates a bounded one with the given capacity.
         /// </summary>
         /// <typeparam name="TEvent">The event type.</typeparam>
         /// <param name="capacity">The bounded channel capacity.</param>
-        Channel<DomainEvent> GetOrCreateBoundedChannel<TEvent>(int capacity) where TEvent : DomainEvent;
+        Channel<TEvent> GetOrCreateBoundedChannel<TEvent>(int capacity) where TEvent : DomainEvent;
 
         /// <summary>
         /// Closes and removes the channel associated with the event type.
@@ -45,6 +45,6 @@ namespace MemoryEventBus.Domain.Events.Interfaces.Base
         /// <param name="event">The event instance.</param>
         /// <param name="cancellationToken">Cancellation token.</param>
         /// <returns>True if written; false otherwise.</returns>
-        Task<bool> TryWriteAsync<TEvent>(TEvent @event, CancellationToken cancellationToken = default) where TEvent : DomainEvent;
+        ValueTask<bool> TryWriteAsync<TEvent>(TEvent @event, CancellationToken cancellationToken = default) where TEvent : DomainEvent;
     }
 }

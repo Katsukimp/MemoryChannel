@@ -26,12 +26,12 @@ namespace MemoryEventBus.Infrastructure.Events
         }
 
         /// <inheritdoc />
-        public override async Task<bool> TryWriteAsync<TEvent>(TEvent @event, CancellationToken cancellationToken = default)
+        public override async ValueTask<bool> TryWriteAsync<TEvent>(TEvent @event, CancellationToken cancellationToken = default)
         {
             Activity? activity = _activitySource?.StartPublishActivity(typeof(TEvent).Name);
             try
             {
-                var result = await base.TryWriteAsync(@event, cancellationToken);
+                var result = await base.TryWriteAsync(@event, cancellationToken).ConfigureAwait(false);
                 if (result)
                 {
                     _metrics?.RecordEventPublished<TEvent>(typeof(TEvent).Name);
