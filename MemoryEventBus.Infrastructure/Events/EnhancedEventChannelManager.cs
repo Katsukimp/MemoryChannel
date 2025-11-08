@@ -16,7 +16,7 @@ namespace MemoryEventBus.Infrastructure.Events
             _metrics = metrics;
         }
 
-        public new async Task<bool> TryWriteAsync<TEvent>(TEvent @event, CancellationToken cancellationToken = default) where TEvent : DomainEvent
+        public override async Task<bool> TryWriteAsync<TEvent>(TEvent @event, CancellationToken cancellationToken = default)
         {
             try
             {
@@ -37,11 +37,11 @@ namespace MemoryEventBus.Infrastructure.Events
             {
                 _logger.LogError(ex, "Error publishing event {EventType} with ID {EventId}", typeof(TEvent).Name, @event.EventId);
                 _metrics?.RecordEventFailed<TEvent>(typeof(TEvent).Name, ex.GetType().Name);
-                throw;
+                return false;
             }
         }
 
-        public new int GetChannelDepth<TEvent>() where TEvent : DomainEvent
+        public override int GetChannelDepth<TEvent>()
         {
             var depth = base.GetChannelDepth<TEvent>();
             _metrics?.RecordChannelDepth(typeof(TEvent).Name, depth);
