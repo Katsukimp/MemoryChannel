@@ -124,7 +124,7 @@
               "RelativeDocumentMoniker": "MemoryEventBus.Infrastructure\\Events\\Consumers\\EnhancedStockReducerConsumer.cs",
               "ToolTip": "C:\\Users\\eduar\\source\\repos\\MemoryEventBus\\MemoryEventBus.Infrastructure\\Events\\Consumers\\EnhancedStockReducerConsumer.cs",
               "RelativeToolTip": "MemoryEventBus.Infrastructure\\Events\\Consumers\\EnhancedStockReducerConsumer.cs",
-              "ViewState": "AgIAAC8AAAAAAAAAAAAwwAAAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAC8AAAAAAAAAAAAwwD0AAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-11-04T14:40:14.8Z",
               "EditorCaption": ""
@@ -139,8 +139,7 @@
               "RelativeToolTip": "MemoryEventBus.Infrastructure\\Events\\Consumers\\StockReducerConsumer.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-11-04T14:40:13.795Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-11-04T14:40:13.795Z"
             },
             {
               "$type": "Document",
@@ -152,8 +151,7 @@
               "RelativeToolTip": "MemoryEventBus.Domain\\Events\\EventChannelManager.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-11-04T14:40:09.792Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-11-04T14:40:09.792Z"
             },
             {
               "$type": "Document",
@@ -165,8 +163,7 @@
               "RelativeToolTip": "MemoryEventBus.Domain\\UseCases\\IPayUseCase.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-11-04T14:40:09.126Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-11-04T14:40:09.126Z"
             },
             {
               "$type": "Document",
@@ -178,8 +175,7 @@
               "RelativeToolTip": "MemoryEventBus\\Formatter\\Logging\\CustomConsoleFormatter.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAABUAAABDAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-11-04T14:32:34.512Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-11-04T14:32:34.512Z"
             },
             {
               "$type": "Document",
@@ -191,8 +187,7 @@
               "RelativeToolTip": "MemoryEventBus.Infrastructure\\Events\\EnhancedEventChannelManager.cs",
               "ViewState": "AgIAAAYAAAAAAAAAAAAAABwAAAAUAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-11-03T13:33:44.208Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-11-03T13:33:44.208Z"
             },
             {
               "$type": "Document",
@@ -204,8 +199,7 @@
               "RelativeToolTip": "MemoryEventBus.Infrastructure\\Events\\RetryPolicies\\RetryPolicies.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-11-03T13:33:43.645Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-11-03T13:33:43.645Z"
             },
             {
               "$type": "Document",
@@ -217,8 +211,7 @@
               "RelativeToolTip": "MemoryEventBus.Domain\\Events\\Configuration\\EventBusOptions.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAAFAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-11-03T13:33:27.165Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-11-03T13:33:27.165Z"
             },
             {
               "$type": "Document",
@@ -230,8 +223,7 @@
               "RelativeToolTip": "MemoryEventBus.Domain\\Events\\Concrete\\OrderPaidEvent.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-11-03T13:33:26.562Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-11-03T13:33:26.562Z"
             },
             {
               "$type": "Document",
@@ -243,8 +235,7 @@
               "RelativeToolTip": "MemoryEventBus.Domain\\Events\\Aggregate\\DomainEvent.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-11-03T13:33:25.675Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-11-03T13:33:25.675Z"
             },
             {
               "$type": "Document",
@@ -256,8 +247,7 @@
               "RelativeToolTip": "MemoryEventBus\\Program.cs",
               "ViewState": "AgIAABIAAAAAAAAAAAAAAA4AAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-11-03T13:23:48.277Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-11-03T13:23:48.277Z"
             }
           ]
         }
