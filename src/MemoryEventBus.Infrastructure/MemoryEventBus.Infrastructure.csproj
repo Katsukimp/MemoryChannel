@@ -22,10 +22,12 @@
     <EmbedUntrackedSources>true</EmbedUntrackedSources>
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
     <LangVersion>preview</LangVersion>
+    <!-- Output NuGet packages (.nupkg and .snupkg) into the local artifacts folder -->
+    <PackageOutputPath>$(MSBuildProjectDirectory)\artifacts</PackageOutputPath>
   </PropertyGroup>
 
   <ItemGroup>
-    <None Include="..\README.md" Pack="true" PackagePath="/README.md" />
+    <None Include="..\..\README.md" Pack="true" PackagePath="/README.md" />
   </ItemGroup>
 
   <ItemGroup>
