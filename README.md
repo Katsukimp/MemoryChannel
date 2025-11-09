@@ -2,7 +2,7 @@
 
 ## Visão Geral
 
-Uma implementação customizada de Event Bus baseada em `System.Threading.Channels` que oferece performance superior ao MediatR para cenários de alta throughput, com funcionalidades opcionais avançadas.
+Um Event Bus em memória de alta performance, construído sobre `System.Threading.Channels`, projetado para envio de mensagens com baixa latência e processamento paralelo de eventos. Inclui recursos avançados opcionais como métricas, retries, verificação de integridade (health checks) e gerenciamento aprimorado de canais para cenários de alto throughput
 
 ## Funcionalidades Implementadas
 
