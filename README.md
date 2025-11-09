@@ -46,8 +46,8 @@ src/
 Enquanto não há pacote NuGet público:
 1. Adicione referências de projeto onde for usar:
 ```
-dotnet add <SeuProjeto> reference ../MemoryEventBus.Domain/MemoryEventBus.Domain.csproj
-dotnet add <SeuProjeto> reference ../MemoryEventBus.Infrastructure/MemoryEventBus.Infrastructure.csproj
+dotnet add package MemoryEventBus.Abstractions --version 1.0.0
+dotnet add package MemoryEventBus.InMemory --version 1.0.0
 ```
 2. Registre no `Program.cs` ou no builder do Host:
 ```csharp
