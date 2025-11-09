@@ -43,8 +43,7 @@ src/
 ```
 
 ## Instalação
-Enquanto não há pacote NuGet público:
-1. Adicione referências de projeto onde for usar:
+1. Adicione o pacote nuget:
 ```
 dotnet add package MemoryEventBus.Abstractions --version 1.0.0
 dotnet add package MemoryEventBus.InMemory --version 1.0.0
